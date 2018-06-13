@@ -18,6 +18,7 @@ export default {
   queryDelay: 250,
   googleMaps: null,
   highlightMatch: true,
+  beforeSearch: (userInput) => userInput,
   onActivateSuggest: () => {},
   onSuggestSelect: () => {},
   onSuggestNoResults: () => {},
