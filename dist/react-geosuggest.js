@@ -1971,7 +1971,7 @@ var Geosuggest = function (_React$Component) {
       }
 
       var options = {
-        input: this.state.userInput
+        input: this.props.beforeSearch(this.state.userInput)
       },
           inputLength = this.state.userInput.length,
           isShorterThanMinLength = inputLength < this.props.minLength;
@@ -2302,6 +2302,9 @@ exports.default = {
   queryDelay: 250,
   googleMaps: null,
   highlightMatch: true,
+  beforeSearch: function beforeSearch(userInput) {
+    return userInput;
+  },
   onActivateSuggest: function onActivateSuggest() {},
   onSuggestSelect: function onSuggestSelect() {},
   onSuggestNoResults: function onSuggestNoResults() {},
@@ -2569,7 +2572,7 @@ Input.defaultProps = {
   ignoreTab: false,
   onKeyDown: function onKeyDown() {},
   onKeyPress: function onKeyPress() {},
-  autoComplete: 'off'
+  autoComplete: 'nope'
 };
 
 exports.default = Input;
@@ -2628,7 +2631,8 @@ exports.default = {
   ignoreTab: _propTypes2.default.bool,
   label: _propTypes2.default.string,
   autoComplete: _propTypes2.default.string,
-  minLength: _propTypes2.default.number
+  minLength: _propTypes2.default.number,
+  beforeSearch: _propTypes2.default.func
 };
 
 },{"prop-types":11}],20:[function(require,module,exports){
@@ -2791,7 +2795,7 @@ var SuggestItem = function (_React$Component) {
       var content = suggest.label;
 
       if (this.props.renderSuggestItem) {
-        content = this.props.renderSuggestItem(suggest);
+        content = this.props.renderSuggestItem(suggest, this.props.userInput);
       } else if (this.props.isHighlightMatch) {
         content = this.formatMatchedText(this.props.userInput, suggest);
       }
